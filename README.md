@@ -29,7 +29,7 @@ A from-scratch Python market risk engine applied to 28 years of real daily data 
 
 - **Historical simulation reacts too slowly.** A 500-day window barely moves when volatility explodes. In the 2008 crisis, it had **19 exceptions in 144 days** against 1.4 expected, and it spent most of 2009 deep in the red zone (up to 24 exceptions in 250 days).
 - **The normal distribution underestimates the tails.** EWMA adapts to volatility quickly, but with 130 exceptions instead of 70, normal tails are simply too thin for daily returns.
-- **GARCH-t combines both fixes**: volatility that reacts within days, and fat tails. It is the only model that passes coverage, independence and both ES tests. Filtered historical simulation is close behind: its coverage is fine, but its exceptions cluster slightly.
+- **GARCH-t combines both fixes**: volatility that reacts within days, and fat tails. It is the only model that passes coverage, independence and both ES tests; it touched the red-zone threshold only once (10 exceptions in a 250-day window). Filtered historical simulation is close behind: its coverage is fine, but its exceptions cluster slightly.
 
 ![Crises](results/figures/crises_zoom.png)
 
@@ -43,6 +43,7 @@ The zoom shows the problem with historical simulation: its VaR (grey) climbs in 
 | GARCH-t on 20,000 simulated returns with known parameters | alpha 0.084 (true 0.08), beta 0.898 (0.90), nu 5.6 (6) |
 | Basel traffic-light cut-offs (250 days, 99%) | P(X <= 4) = 89.22%, P(X <= 9) = 99.97%, matching the Basel (1996) table |
 | Bond pricing | a par bond prices at 100.0000; with an unchanged yield, the one-day return equals the carry |
+| No look-ahead (`tests/test_no_lookahead.py`) | changing returns from day k leaves every forecast made up to day k unchanged, for all four models |
 
 **Two findings from the validation work:**
 
@@ -83,6 +84,8 @@ Historical ES on the stress window (September 2008 to August 2009) is **4.29%** 
 ├── src/
 │   ├── models.py        # bond returns, GARCH-t maximum likelihood, four VaR/ES models
 │   └── backtest.py      # Kupiec, Christoffersen, traffic light, Acerbi-Szekely, McNeil-Frey
+├── tests/
+│   └── test_no_lookahead.py
 └── results/
     ├── figures/
     ├── tables/
