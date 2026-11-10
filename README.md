@@ -1,5 +1,7 @@
 # Market Risk: VaR and Expected Shortfall with Regulatory Backtesting
 
+[![tests](https://github.com/yelbakali-creator/market-risk-var-es-backtesting/actions/workflows/tests.yml/badge.svg)](https://github.com/yelbakali-creator/market-risk-var-es-backtesting/actions/workflows/tests.yml)
+
 A from-scratch Python market risk engine applied to 28 years of real daily data (1994-2022, including the 2008 crisis and the Covid crash):
 
 1. **Portfolio**: 60% equities (20 large US stocks, equal-weighted) and 40% constant-maturity 10-year US Treasury, rebalanced daily. Bond returns come from exact repricing of a par bond on the daily Treasury yields.
@@ -96,6 +98,7 @@ Historical ES on the stress window (September 2008 to August 2009) is **4.29%** 
 
 ```bash
 pip install -r requirements.txt
+python -m pytest       # 5 automated validation tests
 python run_study.py
 ```
 
