@@ -1,0 +1,9 @@
+period,model,days,exceptions,expected
+Global financial crisis (Sep 2008 - Mar 2009),Historical simulation,144,19,1.44
+Global financial crisis (Sep 2008 - Mar 2009),EWMA normal,144,4,1.44
+Global financial crisis (Sep 2008 - Mar 2009),GARCH-t,144,4,1.44
+Global financial crisis (Sep 2008 - Mar 2009),Filtered historical simulation,144,3,1.44
+Covid crash (Feb - Apr 2020),Historical simulation,52,8,0.52
+Covid crash (Feb - Apr 2020),EWMA normal,52,5,0.52
+Covid crash (Feb - Apr 2020),GARCH-t,52,4,0.52
+Covid crash (Feb - Apr 2020),Filtered historical simulation,52,2,0.52

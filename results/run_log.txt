@@ -1,0 +1,60 @@
+Portfolio days 8043 (1990-01-03 to 2022-03-11); backtest days 7043 from 1994-01-03
+
+Data summary
+                   series  annual_return  annual_volatility  worst_day  correlation_with_equities
+Equities (equal-weighted)         0.1895             0.1896    -0.1077                     1.0000
+             10y Treasury         0.0585             0.0734    -0.0275                    -0.2109
+          60/40 portfolio         0.1371             0.1113    -0.0565                     0.9662
+
+GARCH-t vs arch
+     parameter  this_project  arch_library
+ omega (x 1e4)       0.00408       0.00408
+         alpha       0.07684       0.07688
+          beta       0.91587       0.91584
+            nu       8.44189       8.44137
+log-likelihood   29929.85484   29929.80948
+
+GARCH-t on simulated data
+parameter  true  estimated
+    omega  0.00    0.00000
+    alpha  0.08    0.08393
+     beta  0.90    0.89753
+       nu  6.00    5.59714
+
+Backtests
+                                                 0            1        2                               3
+model                        Historical simulation  EWMA normal  GARCH-t  Filtered historical simulation
+days                                          7043         7043     7043                            7043
+exceptions                                     105          130       81                              85
+expected                                     70.43        70.43    70.43                           70.43
+exception_rate                              0.0149       0.0185   0.0115                          0.0121
+kupiec_p                                    0.0001          0.0   0.2163                           0.091
+christoffersen_ind_p                           0.0       0.0008   0.0839                          0.0232
+christoffersen_cc_p                            0.0          0.0   0.1045                          0.0182
+p_exception_after_exception                 0.1238       0.0692    0.037                          0.0471
+traffic_green                               0.6734       0.5121   0.7767                          0.7727
+traffic_yellow                              0.2685       0.4463   0.2231                          0.2273
+traffic_red                                 0.0581       0.0417   0.0001                             0.0
+max_exceptions_250d                             24           12       10                               8
+es_acerbi_szekely_z2                       -0.2866      -0.4191  -0.1033                         -0.1097
+es_mcneil_frey_mean                         0.1943       0.3175   0.0584                          0.0402
+es_mcneil_frey_p                            0.0094          0.0   0.1109                          0.1942
+average_var99                               0.0171       0.0143   0.0155                          0.0155
+average_es975                               0.0176       0.0144   0.0158                           0.016
+
+Crisis exceptions
+                                       period                          model  days  exceptions  expected
+Global financial crisis (Sep 2008 - Mar 2009)          Historical simulation   144          19      1.44
+Global financial crisis (Sep 2008 - Mar 2009)                    EWMA normal   144           4      1.44
+Global financial crisis (Sep 2008 - Mar 2009)                        GARCH-t   144           4      1.44
+Global financial crisis (Sep 2008 - Mar 2009) Filtered historical simulation   144           3      1.44
+                 Covid crash (Feb - Apr 2020)          Historical simulation    52           8      0.52
+                 Covid crash (Feb - Apr 2020)                    EWMA normal    52           5      0.52
+                 Covid crash (Feb - Apr 2020)                        GARCH-t    52           4      0.52
+                 Covid crash (Feb - Apr 2020) Filtered historical simulation    52           2      0.52
+
+Stressed ES
+ stressed_es_2008_09  current_es_last_250d  ratio
+              0.0429                0.0104 4.1281
+
+Traffic light binomial cut-offs (250 days, p = 1%): P(X<=4) = 0.8922, P(X<=9) = 0.99975
